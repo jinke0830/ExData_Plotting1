@@ -1,0 +1,8 @@
+mydata <- read.table("household_power_consumption.txt",sep=";",header=TRUE)
+mydata$Date <- strptime(mydata$Date,format="%d/%m/%Y")
+mydata_sub <- subset(mydata, Date == "2007-02-01" | Date == "2007-02-02" )
+mydata_sub$Global_active_power <- as.numeric(as.character(mydata_sub$Global_active_power))
+with(mydata_sub,plot(Datetime,as.numeric(as.character(Sub_metering_1)),type="l",xlab="",ylab="Energy sub metering"))
+with(mydata_sub,lines(Datetime,as.numeric(as.character(Sub_metering_2)),col="red"))
+with(mydata_sub,lines(Datetime,as.numeric(as.character(Sub_metering_3)),col="blue"))
+legend("topright",border = "black", col = c("black","red","blue"),legend =c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),lty=1)
